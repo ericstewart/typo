@@ -4,7 +4,7 @@
 # (Use only when you can't set environment variables through your web/app server)
 # ENV['RAILS_ENV'] = 'production'
 
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.3' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -31,7 +31,7 @@ Rails::Initializer.run do |config|
   # Otherwise, I can't localize plugins <= localization
   # Forcing manually the load of the textfilters plugins fixes the bugs with apache in production.
   config.plugins = [ 'localization', :all ]
-  
+
   config.load_paths += %W(
     vendor/rubypants
     vendor/akismet
@@ -59,7 +59,7 @@ Rails::Initializer.run do |config|
   config.gem 'calendar_date_select'
   config.gem 'bluecloth', :version => '~> 2.0.0'
   config.gem 'coderay', :version => '~> 0.8'
-  
+
   # Use the database for sessions instead of the file system
   # (create the session table with 'rake create_sessions_table')
   config.action_controller.session_store = :active_record_store
@@ -88,7 +88,7 @@ ActiveSupport::CoreExtensions::Time::Conversions::DATE_FORMATS.merge!(
 
 ActionMailer::Base.default_charset = 'utf-8'
 
-# I wanted to put this as a "setup" page, but it seems I can't catch the 
+# I wanted to put this as a "setup" page, but it seems I can't catch the
 # exception fast enough and get a 500 error
 #if RAILS_ENV != 'test'
 #  begin
