@@ -45,20 +45,20 @@ describe Admin::ContentController do
   end
 
   describe 'insert_editor action' do
-    
+
     before do
       @user = users(:tobi)
       request.session = { :user => @user.id }
     end
-    
+
     it 'should render _simple_editor' do
       get(:insert_editor, :editor => 'simple')
-      response.should render_template('simple_editor')
+      response.should render_template('admin/content/_simple_editor.html.erb')
     end
 
     it 'should render _visual_editor' do
       get(:insert_editor, :editor => 'visual')
-      response.should render_template('visual_editor')
+      response.should render_template('admin/content/_visual_editor.html.erb')
     end
 
   end
@@ -76,7 +76,7 @@ describe Admin::ContentController do
       { :title => "posted via tests!",
         :body => "A good body",
         :keywords => "tagged",
-        :allow_comments => '1', 
+        :allow_comments => '1',
         :allow_pings => '1' }.merge(options)
     end
 

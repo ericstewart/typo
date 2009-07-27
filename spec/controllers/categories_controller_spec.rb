@@ -47,7 +47,7 @@ describe CategoriesController, '/articles/category/personal' do
   it 'should call Category.find_by_permalink' do
     Category.should_receive(:find_by_permalink) \
       .with('personal') \
-      .and_return(mock('category', :null_object => true))
+      .and_return(mock('category', :name => 'personal', :null_object => true))
     do_get
   end
 

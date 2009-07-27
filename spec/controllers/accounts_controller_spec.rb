@@ -24,7 +24,7 @@ describe 'A successfully authenticated login' do
 
   it 'sets typo_user_profile cookie' do
     make_request
-    cookies[:typo_user_profile].should == ['admin']
+    cookies[:typo_user_profile].should == 'admin'
   end
 
   it 'redirects to /bogus/location' do
@@ -32,7 +32,7 @@ describe 'A successfully authenticated login' do
     make_request
     response.should redirect_to('/bogus/location')
   end
-  
+
   it 'redirects to /admin if no return' do
     make_request
     response.should redirect_to(:controller => 'admin')
@@ -48,7 +48,7 @@ describe 'A successfully authenticated login' do
     User.stub!(:count).and_return(0)
     make_request
     response.should redirect_to('/accounts/signup')
-  end  
+  end
 end
 
 describe 'User is inactive' do
@@ -58,16 +58,16 @@ describe 'User is inactive' do
     User.stub!(:authenticate).and_return(nil)
     User.stub!(:count).and_return(1)
   end
- 
+
   def make_request
-    post 'login', { :user_login => 'inactive', :password => 'longtest' } 
+    post 'login', { :user_login => 'inactive', :password => 'longtest' }
   end
-  
+
   it 'no user in goes in the session' do
     make_request
     response.session[:user_id].should be_nil
   end
-  
+
   it 'login should == "inactive"' do
     make_request
     assigns[:login].should == 'inactive'
@@ -82,7 +82,7 @@ describe 'User is inactive' do
     make_request
     response.should render_template(:login)
   end
-  
+
 end
 
 describe 'Login gets the wrong password' do
@@ -261,7 +261,7 @@ describe 'User is logged in' do
   it 'logging out deletes cookies containing credentials' do
     @user.should_receive(:forget_me)
     get 'logout'
-    cookies[:auth_token].should == []
-    cookies[:typo_user_profile].should == []
+    cookies[:auth_token].should be_nil
+    cookies[:typo_user_profile].should be_nil
   end
 end
